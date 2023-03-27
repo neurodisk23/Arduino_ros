@@ -1,0 +1,3 @@
+In this code, we first include the necessary library: Wire for I2C communication and MPU9250 for the MPU9250 sensor. We define the I2C addresses of the two sensors, create an instance of the MPU9250 for each sensor, and set the accelerometer and gyroscope range and bandwidth.
+
+In the loop function, we read the sensor data using the readSensor() method of the MPU9250 library, and get the acceleration and gyroscope values for each sensor using the getAccelX_mss(), getAccelY_mss(), getAccelZ_mss(), getGyroX_rads(), getGyroY_rads(), and getGyroZ_rads() methods. Finally, we print the values to the serial monitor.
