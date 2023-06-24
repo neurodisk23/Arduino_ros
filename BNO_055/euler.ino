@@ -22,21 +22,23 @@ void setup() {
 void loop() {
   uint8_t system, gyro_calib, accel, mg = 0;
   myIMU.getCalibration(&system, &gyro_calib, &accel, &mg);
+  imu::Vector<3> euler = myIMU.getVector(Adafruit_BNO055::VECTOR_EULER);
   imu::Vector<3> acc = myIMU.getVector(Adafruit_BNO055::VECTOR_ACCELEROMETER);
   imu::Vector<3> gyro = myIMU.getVector(Adafruit_BNO055::VECTOR_GYROSCOPE);
   imu::Vector<3> mag = myIMU.getVector(Adafruit_BNO055::VECTOR_MAGNETOMETER);
-/*
+
+  /*
   Serial.print(acc.x());
   Serial.print(",");
   Serial.print(acc.y());
   Serial.print(",");
   Serial.print(acc.z());
   Serial.print(",");*/
-  Serial.print(gyro.x());
+  Serial.print(euler.x());
   Serial.print(",");
-  Serial.print(gyro.y());
+  Serial.print(euler.y());
   Serial.print(",");
-  Serial.print(gyro.z());
+  Serial.print(euler.z());
   /*
   Serial.print(",");
   Serial.print(mag.x());
@@ -52,8 +54,11 @@ void loop() {
   Serial.print(mg);
   Serial.print(",");
   Serial.println(system);
-  if (system == 3) {digitalWrite(LED_BUILTIN, HIGH);}
-  else {digitalWrite(LED_BUILTIN, LOW);}
+  if (system == 3) {
+    digitalWrite(LED_BUILTIN, HIGH);
+  } else {
+    digitalWrite(LED_BUILTIN, LOW);
+  }
 
   delay(BNO055_SAMPLERATE_DELAY_MS);
 }
